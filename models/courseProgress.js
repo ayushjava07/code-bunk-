@@ -1,0 +1,14 @@
+const mongoose=require('mongoose');
+const CourseProgressSchema=new mongoose.Schema({
+    courseId:{
+        type:mongoose.Schema.Types.ObjectId,
+        required:true
+    },
+    completedVideos:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"SubSection"
+        }
+    ]
+    
+})
