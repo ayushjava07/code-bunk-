@@ -1,12 +1,12 @@
 const { uploadImage } = require('../utils/imageUploader');
 const User = require('../models/user');
-const Tag = require('../models/tag');
+const Tag = require('../models/category');
 const Course = require('../models/course')
 require('dotenv').config();
 exports.createCourse = async (req, res) => {
-    const { courseName, courseDescription, WhatYouWillLearn, price, tags } = req.body;
+    const { courseName, courseDescription, WhatYouWillLearn, price, category } = req.body;
     const { thumbnail } = req.file;
-    if (!courseName || !courseDescription || !thumbnail || !WhatYouWillLearn || !thumbnail || !tags || !price) {
+    if (!courseName || !courseDescription || !thumbnail || !WhatYouWillLearn || !thumbnail || !category || !price) {
         return res.status(300).json({
             success: false,
             message: "all fields are required!"
@@ -21,7 +21,7 @@ exports.createCourse = async (req, res) => {
                 message: "No instructor found "
             })
         }
-        const tagDetails = await Tag.findById({ tags });
+        const tagDetails = await Tag.findById({ category });
         if (!tagDetails) {
             return res.status(400).json({
                 success: false,
@@ -34,7 +34,7 @@ exports.createCourse = async (req, res) => {
             courseDescription,
             WhatYouWillLearn,
             price,
-            tags: tags._id,
+            category: category._id,
             thumbnail: CloudImageUrl,
             instructor: instructorDetails._id,
         })

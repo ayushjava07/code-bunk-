@@ -1,4 +1,5 @@
 const mongoose=require('mongoose');
+const section = require('./section');
 const SubsectionSchema=new mongoose.Schema({
     title:{
         type:String,
@@ -22,6 +23,11 @@ const SubsectionSchema=new mongoose.Schema({
     },
     additionalUrl:{
         type:String,
+    },
+    sectionId:{
+        type:mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref:"Section"
     }
 })
 module.exports=mongoose.model("SubSection",SubsectionSchema)

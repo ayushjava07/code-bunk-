@@ -1,7 +1,7 @@
-const Tag = require('../models/tag');
 const user = require('../models/user');
+const Category=require('../models/category')
 //create tag
-exports.Tag = async (req, res) => {
+exports.Category = async (req, res) => {
     try {
         const { name, description } = req.body;
         if (!name || !description) {
@@ -27,18 +27,18 @@ exports.Tag = async (req, res) => {
     }
 }
 //get all tag
-exports.getTags = async (req, res) => {
+exports.getCategory = async (req, res) => {
     try {
-        const tags=await Tag.find({},{name:true,description:true});
-        if(tags){
+        const category=await Category.find({},{name:true,description:true});
+        if(category){
             return res.status(200).json({
                 success:true,
-                message:"tags fetches successfully",
-                tags:tags
+                message:"category fetches successfully",
+                category:category
             })
         }
     } catch (error) {
-        console.log("error occur while fetching tags:", error);
+        console.log("error occur while fetching Category:", error);
         return res.status(500).json({
             success: false,
             message: "something went wrong while fetching tag ",

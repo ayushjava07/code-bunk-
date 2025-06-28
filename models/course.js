@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { Category } = require('../controllers/category');
 const CourseSchema = new mongoose.Schema({
     courseName: {
         type: String,
@@ -36,7 +37,7 @@ const CourseSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    tags: {
+    Category: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Tag",
         required: true
