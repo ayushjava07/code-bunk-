@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    additionDetails: {
+    additionalDetails: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Profile",
         required: true

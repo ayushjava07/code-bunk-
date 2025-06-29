@@ -88,7 +88,7 @@ exports.signup = async (req, res) => {
             lastName,
             email,
             password: hashPassword,
-            additionDetails: profileDetails._id,
+            additionalDetails: profileDetails._id,
             accountType,
             image: `https://api.dicebear.com/9.x/fun-emoji/svg?seed=bunkcode${email}`
         })

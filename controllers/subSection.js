@@ -44,7 +44,8 @@ exports.CreateSubSection = async (req, res) => {
     }
 }
 exports.updateSubsection = async (req, res) => {
-    const { title, description, timeDuration, SectionId, SubSectionId } = req.body;
+    try {
+            const { title, description, timeDuration, SectionId, SubSectionId } = req.body;
     const { videoFile } = req.file;
     const videoUrl = await uploadImage(videoFile, process.env.FOLDER_NAME);
     const UpdateSubsection = await SubSection.findByIdAndUpdate(
@@ -59,9 +60,18 @@ exports.updateSubsection = async (req, res) => {
             section
         })
     }
+    } catch (error) {
+        console.log("something went wrong while updating the section:",error.message);
+        return res.status(500).json({
+            success:false,
+            message:"something went wrong while updating the course ",
+            error:error.message
+        })
+    }
 }
 exports.deleteSubsection = async (req, res) => {
-    const { SectionId, SubSectionId } = req.body;
+    try{
+            const { SectionId, SubSectionId } = req.body;
     const DeleteSubsection = await SubSection.findByIdAndDelete(SubSectionId);
     if (!DeleteSubsection) {
         return res.status(404).json({
@@ -85,4 +95,14 @@ exports.deleteSubsection = async (req, res) => {
         subsection: deletesubsection,
         section:updatedSection
     })
+    }
+    catch(error){
+        console.log("something went wrong while deleting the subsection");
+        return res.status(500).json({
+            success:false,
+            message:"something went wrong while deleting the subsection",
+            error:error.message
+        })
+        
+    }
 }
